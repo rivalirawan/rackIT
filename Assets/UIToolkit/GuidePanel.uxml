@@ -1,13 +1,15 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UIToolkit/GuidePanel.uss?fileID=7433441132597879392&amp;guid=82ffc50b8bf594a4693aa32150a59c2a&amp;type=3#GuidePanel" />
-    <ui:VisualElement class="guide-container">
-        <ui:Label text="Panduan" class="guide-title" />
-        <ui:ScrollView class="guide-scroll">
-            <ui:Label text="1. Pasang motherboard ke casing..." class="guide-item" />
-            <ui:Label text="2. Masukkan prosesor ke socket..." class="guide-item" />
-            <ui:Label text="3. Pasang RAM pada slot RAM..." class="guide-item" />
-            <ui:Label text="4. Sambungkan kabel power dan data..." class="guide-item" />
-        </ui:ScrollView>
-        <ui:Button name="btnCloseGuide" text="Tutup" class="guide-close-button" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIToolkit/GuidePanel.uss" />
+    <ui:VisualElement class="main-overlay">
+        <ui:VisualElement class="guide-panel">
+            <ui:Button name="btnCloseGuide" text="X" class="close-button" />
+            <ui:Label text="Panduan" class="panel-title" />
+            <ui:VisualElement class="guide-content">
+                <ui:Label text="1. Pasang motherboard ke casing." class="guide-item" />
+                <ui:Label text="2. Masukkan prosesor ke socket." class="guide-item" />
+                <ui:Label text="3. Pasang RAM pada slot RAM." class="guide-item" />
+                <ui:Label text="4. Sambungkan kabel power" class="guide-item" />
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -5,7 +5,7 @@ public class GuidePanelUI : MonoBehaviour
 {
     private void OnEnable()
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
+        var root = GetComponentInChildren<UIDocument>().rootVisualElement;
         var btnClose = root.Q<Button>("btnCloseGuide");
 
         btnClose.clicked += () =>
