@@ -19,71 +19,61 @@ public static class FirebaseAuthManager
 
     public static IEnumerator RegisterUser(string email, string password, Action<bool, string> callback)
     {
-        var authRequest = new FirebaseAuthRequest
-        {
-            email = email,
-            password = password,
-            returnSecureToken = true
-        };
-
-        string jsonBody = JsonUtility.ToJson(authRequest);
-
-        using UnityWebRequest request = new UnityWebRequest(FirebaseAuthSignUpUrl + FirebaseConfig.WebAPIKey, "POST");
-        byte[] jsonToSend = Encoding.UTF8.GetBytes(jsonBody);
-        request.uploadHandler = new UploadHandlerRaw(jsonToSend);
-        request.downloadHandler = new DownloadHandlerBuffer();
-        request.SetRequestHeader("Content-Type", "application/json");
-
-        yield return request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.Success)
-        {
-            callback(true, "Registrasi berhasil!");
-        }
-        else
-        {
-            string errorMessage = ParseFirebaseError(request.downloadHandler.text);
-            callback(false, $"Registrasi gagal: {errorMessage}");
-        }
+        yield return SendAuthRequest(
+            FirebaseAuthSignUpUrl + FirebaseConfig.WebAPIKey,
+            email, password,
+            successMsg: "Registrasi berhasil!",
+            failurePrefix: "Registrasi gagal:",
+            callback
+        );
     }
 
     public static IEnumerator LoginUser(string email, string password, Action<bool, string> callback)
     {
+        yield return SendAuthRequest(
+            FirebaseAuthSignInUrl + FirebaseConfig.WebAPIKey,
+            email, password,
+            successMsg: "Login berhasil!",
+            failurePrefix: "Login gagal:",
+            callback
+        );
+    }
+
+    private static IEnumerator SendAuthRequest(string url, string email, string password, string successMsg, string failurePrefix, Action<bool, string> callback)
+    {
         var authRequest = new FirebaseAuthRequest
         {
             email = email,
-            password = password,
-            returnSecureToken = true
+            password = password
         };
 
         string jsonBody = JsonUtility.ToJson(authRequest);
-
-        using UnityWebRequest request = new UnityWebRequest(FirebaseAuthSignInUrl + FirebaseConfig.WebAPIKey, "POST");
-        byte[] jsonToSend = Encoding.UTF8.GetBytes(jsonBody);
-        request.uploadHandler = new UploadHandlerRaw(jsonToSend);
-        request.downloadHandler = new DownloadHandlerBuffer();
+        using UnityWebRequest request = new UnityWebRequest(url, "POST")
+        {
+            uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(jsonBody)),
+            downloadHandler = new DownloadHandlerBuffer()
+        };
         request.SetRequestHeader("Content-Type", "application/json");
 
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            callback(true, "Login berhasil!");
+            callback(true, successMsg);
         }
         else
         {
             string errorMessage = ParseFirebaseError(request.downloadHandler.text);
-            callback(false, $"Login gagal: {errorMessage}");
+            callback(false, $"{failurePrefix} {errorMessage}");
         }
     }
 
-    // Optional: parser untuk mengambil pesan error dari response Firebase
     private static string ParseFirebaseError(string json)
     {
         try
         {
             var errorWrapper = JsonUtility.FromJson<FirebaseErrorWrapper>(json);
-            return errorWrapper.error.message;
+            return errorWrapper?.error?.message ?? "Tidak diketahui.";
         }
         catch
         {
