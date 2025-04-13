@@ -19,41 +19,77 @@ public class LoginRegisterPanelUI : MonoBehaviour
 
         var closeBtn = root.Q<Button>("btnClose");
 
-        // Reset display visibility
+        // Input fields
+        var emailInput = root.Q<TextField>("emailInput");
+        var passwordInput = root.Q<TextField>("passwordInput");
+
+        var registerNameInput = root.Q<TextField>("registerNameInput");
+        var registerEmailInput = root.Q<TextField>("registerEmailInput");
+        var registerPasswordInput = root.Q<TextField>("registerPasswordInput");
+        var registerConfirmInput = root.Q<TextField>("registerConfirmInput");
+
+        // Reset state ke Login saat panel dibuka
         loginGroup.style.display = DisplayStyle.Flex;
         registerGroup.style.display = DisplayStyle.None;
         switchToRegister.style.display = DisplayStyle.Flex;
         panelTitle.text = "Login";
 
-        // Hapus semua event listener sebelumnya (opsional, jika pakai RegisterCallback, ini aman)
+        // Tombol Login
         loginButton.clicked += () =>
         {
-            string email = root.Q<TextField>("emailInput").value;
-            string password = root.Q<TextField>("passwordInput").value;
+            string email = emailInput.value;
+            string password = passwordInput.value;
 
-            Debug.Log($"Login attempt: {email} / {password}");
-            // TODO: koneksi ke backend
+            Debug.Log($"Login attempt: {email}");
+
+            StartCoroutine(FirebaseAuthManager.LoginUser(email, password, (success, message) =>
+            {
+                if (success)
+                {
+                    Debug.Log(message);
+                    gameObject.SetActive(false); // Sembunyikan panel jika sukses
+                }
+                else
+                {
+                    Debug.LogWarning(message);
+                }
+            }));
         };
 
+        // Tombol Close Panel
         closeBtn.clicked += () =>
         {
-            gameObject.SetActive(false); // hide panel login
+            gameObject.SetActive(false);
         };
 
+        // Switch ke Register
         switchToRegister.RegisterCallback<ClickEvent>(evt =>
         {
             panelTitle.text = "Register";
-            registerGroup.style.display = DisplayStyle.Flex;
             loginGroup.style.display = DisplayStyle.None;
+            registerGroup.style.display = DisplayStyle.Flex;
             switchToRegister.style.display = DisplayStyle.None;
+
+            // Optional: Reset input
+            registerNameInput.value = "";
+            registerEmailInput.value = "";
+            registerPasswordInput.value = "";
+            registerConfirmInput.value = "";
         });
 
+        // Tombol Register
         registerButton.clicked += () =>
         {
-            string nama = root.Q<TextField>("registerNameInput").value;
-            string email = root.Q<TextField>("registerEmailInput").value;
-            string pass = root.Q<TextField>("registerPasswordInput").value;
-            string confirm = root.Q<TextField>("registerConfirmInput").value;
+            string nama = registerNameInput.value;
+            string email = registerEmailInput.value;
+            string pass = registerPasswordInput.value;
+            string confirm = registerConfirmInput.value;
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(pass))
+            {
+                Debug.LogWarning("Email dan password wajib diisi.");
+                return;
+            }
 
             if (pass != confirm)
             {
@@ -61,10 +97,24 @@ public class LoginRegisterPanelUI : MonoBehaviour
                 return;
             }
 
-            Debug.Log($"Registering: {nama} / {email}");
-            // TODO: koneksi ke backend
+            StartCoroutine(FirebaseAuthManager.RegisterUser(email, pass, (success, message) =>
+            {
+                if (success)
+                {
+                    Debug.Log(message);
+                    panelTitle.text = "Login";
+                    registerGroup.style.display = DisplayStyle.None;
+                    loginGroup.style.display = DisplayStyle.Flex;
+                    switchToRegister.style.display = DisplayStyle.Flex;
+                }
+                else
+                {
+                    Debug.LogWarning(message);
+                }
+            }));
         };
 
+        // Switch back ke Login
         switchToLogin.RegisterCallback<ClickEvent>(evt =>
         {
             panelTitle.text = "Login";

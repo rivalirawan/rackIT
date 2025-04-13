@@ -33,7 +33,6 @@
     -unity-text-align: middle-center;
     font-size: 14px;
     margin-top: 10px;
-    cursor: link;
 }
 
 .register-group {
