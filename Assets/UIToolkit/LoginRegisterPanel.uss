@@ -1,0 +1,41 @@
+.login-panel {
+    width: 300px;
+    margin: auto;
+    padding: 20px;
+    background-color: rgb(51, 51, 51);
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-title {
+    font-size: 28px;
+    color: white;
+    margin-bottom: 20px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+.switch-link {
+    color: rgb(0, 204, 255);
+    -unity-text-align: middle-center;
+    font-size: 14px;
+    margin-top: 10px;
+    cursor: link;
+}
+
+.register-group {
+    margin-top: 20px;
+}
+
+.close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+}

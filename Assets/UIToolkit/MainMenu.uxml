@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIToolkit/MainMenu.uss?fileID=7433441132597879392&amp;guid=a99de92781fefbd4fba07be1784a4b4b&amp;type=3#MainMenu" />
+    <ui:VisualElement name="mainContainer" class="main-container" style="flex-grow: 1;">
+        <ui:Label tabindex="-1" text="RackIT!" parse-escape-sequences="true" display-tooltip-when-elided="true" class="title-label" />
+        <ui:Button text="Mulai Merakit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnStart" class="main-button" />
+        <ui:Button text="Panduan" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnGuide" class="main-button" />
+        <ui:Button text="Pengaturan" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnSettings" class="main-button" />
+        <ui:Button text="Keluar" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnExit" class="main-button" />
+    </ui:VisualElement>
+    <ui:VisualElement name="loginContainer" class="login-container" style="flex-grow: 1;">
+        <ui:Button text="Login" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnLogin" class="login-button" />
+    </ui:VisualElement>
+</ui:UXML>

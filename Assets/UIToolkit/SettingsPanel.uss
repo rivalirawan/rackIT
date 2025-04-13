@@ -1,0 +1,31 @@
+.settings-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1e1e1e;
+    padding: 20px;
+    height: 100%;
+}
+
+.settings-title {
+    font-size: 28px;
+    color: white;
+    margin-bottom: 20px;
+    -unity-font-style: bold;
+}
+
+.settings-toggle {
+    font-size: 18px;
+    color: white;
+    margin: 10px;
+}
+
+.settings-close-button {
+    width: 120px;
+    background-color: #007acc;
+    color: white;
+    border-radius: 6px;
+    font-size: 16px;
+    padding: 8px;
+    margin-top: 20px;
+}

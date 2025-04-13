@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIToolkit/SettingsPanel.uss?fileID=7433441132597879392&amp;guid=308a37e8d92b7a145bf63d3988399873&amp;type=3#SettingsPanel" />
+    <ui:VisualElement class="settings-container">
+        <ui:Label text="Pengaturan" class="settings-title" />
+        <ui:Toggle name="toggleMusic" text="Musik Latar" class="settings-toggle" />
+        <ui:Toggle name="toggleSfx" text="Efek Suara" class="settings-toggle" />
+        <ui:Button name="btnCloseSettings" text="Tutup" class="settings-close-button" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIToolkit/LoginRegisterPanel.uss?fileID=7433441132597879392&amp;guid=95187b2c1305b29469b6f933fa7eb2a4&amp;type=3#LoginRegisterPanel" />
+    <ui:VisualElement class="login-panel" style="flex-grow: 1;">
+        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnClose" text="X" class="close-button" />
+        <ui:Label tabindex="-1" text="Login" parse-escape-sequences="true" display-tooltip-when-elided="true" name="panelTitle" class="panel-title" />
+        <ui:VisualElement name="loginGroup" style="flex-grow: 1;">
+            <ui:TextField picking-mode="Ignore" label="Email" value="filler text" name="emailInput" />
+            <ui:TextField picking-mode="Ignore" label="Password" value="filler text" name="passwordInput" password="true" />
+            <ui:Button text="Login" parse-escape-sequences="true" display-tooltip-when-elided="true" name="loginButton" />
+            <ui:Label tabindex="-1" text="Belum punya akun? Register" parse-escape-sequences="true" display-tooltip-when-elided="true" name="switchToRegister" class="switch-link" />
+        </ui:VisualElement>
+        <ui:VisualElement name="registerGroup" class="register-group" style="flex-grow: 1; opacity: 1; display: none;">
+            <ui:TextField picking-mode="Ignore" label="Nama" value="filler text" name="registerNameInput" />
+            <ui:TextField picking-mode="Ignore" label="Email" value="filler text" name="registerEmailInput" />
+            <ui:TextField picking-mode="Ignore" label="Password" value="filler text" name="registerPasswordInput" password="true" />
+            <ui:TextField picking-mode="Ignore" label="Konfirmasi Password" value="filler text" name="registerConfirmInput" password="true" />
+            <ui:Button text="Register" parse-escape-sequences="true" display-tooltip-when-elided="true" name="registerButton" />
+            <ui:Label tabindex="-1" text="Sudah punya akun? Login" parse-escape-sequences="true" display-tooltip-when-elided="true" name="switchToLogin" enable-rich-text="true" class="switch-link" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
