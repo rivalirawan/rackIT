@@ -3,6 +3,8 @@ using UnityEngine.UIElements;
 
 public class LoginRegisterPanelUI : MonoBehaviour
 {
+    [SerializeField] private MainMenuUI mainMenuUI;
+
     private void OnEnable()
     {
         var root = GetComponentInChildren<UIDocument>().rootVisualElement;
@@ -47,7 +49,11 @@ public class LoginRegisterPanelUI : MonoBehaviour
                 if (success)
                 {
                     Debug.Log(message);
-                    gameObject.SetActive(false); // Sembunyikan panel jika sukses
+
+                    PlayerPrefs.SetString("email", email); // auto-login simpan email
+
+                    mainMenuUI?.OnLoginSuccess(email); // PANGGIL ini untuk update UI langsung
+                    gameObject.SetActive(false);
                 }
                 else
                 {
@@ -101,6 +107,7 @@ public class LoginRegisterPanelUI : MonoBehaviour
             {
                 if (success)
                 {
+                    PlayerPrefs.SetString("email", email);
                     Debug.Log(message);
                     panelTitle.text = "Login";
                     registerGroup.style.display = DisplayStyle.None;

@@ -59,6 +59,10 @@ public static class FirebaseAuthManager
 
         if (request.result == UnityWebRequest.Result.Success)
         {
+            // Simpan email ke PlayerPrefs
+            PlayerPrefs.SetString("user_email", email);
+            PlayerPrefs.Save();
+
             callback(true, successMsg);
         }
         else

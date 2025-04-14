@@ -7,7 +7,9 @@
         <ui:Button text="Pengaturan" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnSettings" class="main-button" />
         <ui:Button text="Keluar" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnExit" class="main-button" />
     </ui:VisualElement>
-    <ui:VisualElement name="loginContainer" class="login-container" style="flex-grow: 1;">
-        <ui:Button text="Login" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnLogin" class="login-button" />
+    <ui:VisualElement name="userContainer" class="login-container" style="flex-grow: 1;">
+        <ui:Label name="labelUserName" class="user-label" text="" />
+        <ui:Button text="Login" name="btnLogin" class="login-button" />
+        <ui:Button text="Logout" name="btnLogout" class="logout-button" style="display: none;" />
     </ui:VisualElement>
 </ui:UXML>
